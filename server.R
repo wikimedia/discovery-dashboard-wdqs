@@ -20,7 +20,7 @@ shinyServer(function(input, output) {
     wdqs_usage %>%
       dplyr::filter(path %in% c("/", "/index.php") & query == "other") %>%
       dplyr::group_by(timestamp) %>%
-      summarise(total = sum(events)) %>%
+      dplyr::summarise(total = sum(events)) %>%
       # tidyr::spread(query, total) %>%
       { xts(., order.by = .$timestamp) } %>%
       dygraph(main = "Daily WDQS usage", group = "wdqs_basic",
