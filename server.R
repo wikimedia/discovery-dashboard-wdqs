@@ -18,7 +18,7 @@ shinyServer(function(input, output) {
   
   output$wdqs_usage_plot <- renderDygraph({
     wdqs_usage %>%
-      dplyr::filter(path == "/" & http_status == 200) %>%
+      dplyr::filter(path == "/" & http_success) %>%
       dplyr::select(c(timestamp, events)) %>%
       { xts(., order.by = .$timestamp) } %>%
       dygraph(main = "Daily WDQS Homepage usage", group = "wdqs_basic",
@@ -31,7 +31,7 @@ shinyServer(function(input, output) {
   
   output$sparql_usage_plot <- renderDygraph({
     wdqs_usage %>%
-      dplyr::filter(path == "/bigdata/namespace/wdq/sparql" & http_status == "200") %>%
+      dplyr::filter(path == "/bigdata/namespace/wdq/sparql" & http_success) %>%
       dplyr::select(c(timestamp, events)) %>%
       { xts(., order.by = .$timestamp) } %>%
       dygraph(main = "Daily SPARQL usage", group = "wdqs_basic",
