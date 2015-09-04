@@ -20,8 +20,8 @@ sidebar <- dashboardSidebar(
 body <- dashboardBody(
   tabItems(
     tabItem(tabName = "wdqs_usage",
-            fluidRow(column(dygraphOutput("wdqs_usage_plot"), width = 6),
-                     column(dygraphOutput("sparql_usage_plot"), width = 6)),
+            dygraphOutput("wdqs_usage_plot", height = "200px"),
+            dygraphOutput("sparql_usage_plot", height = "200px"),
             includeMarkdown("./assets/wdqs_basic.md"))
   ) # /tabItems
 ) # /dashboardBody

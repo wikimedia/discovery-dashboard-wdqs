@@ -1,10 +1,6 @@
 Wikidata Query Service (WDQS) usage
 =======
 
-**Requests** in *Daily WDQS usage* are the non-query requests made to `/` and `/index.php`.
-
-**Events** in *Daily SparQL usage* are the `sparql-results` requests.
-
 Outages and inaccuracies
 ------
 

@@ -18,13 +18,11 @@ shinyServer(function(input, output) {
   
   output$wdqs_usage_plot <- renderDygraph({
     wdqs_usage %>%
-      dplyr::filter(path %in% c("/", "/index.php") & query == "other") %>%
-      dplyr::group_by(timestamp) %>%
-      dplyr::summarise(total = sum(events)) %>%
-      # tidyr::spread(query, total) %>%
+      dplyr::filter(path == "/" & http_status == 200) %>%
+      dplyr::select(c(timestamp, events)) %>%
       { xts(., order.by = .$timestamp) } %>%
-      dygraph(main = "Daily WDQS usage", group = "wdqs_basic",
-              xlab = "Date", ylab = "Requests") %>%
+      dygraph(main = "Daily WDQS Homepage usage", group = "wdqs_basic",
+              xlab = "Date", ylab = "Events") %>%
       dyOptions(strokeWidth = 3, colors = brewer.pal(3, "Set2")[1],
                 drawPoints = TRUE, pointSize = 3, labelsKMB = TRUE,
                 includeZero = TRUE) %>%
@@ -33,10 +31,10 @@ shinyServer(function(input, output) {
   
   output$sparql_usage_plot <- renderDygraph({
     wdqs_usage %>%
-      dplyr::filter(path == "/bigdata/namespace/wdq/sparql" & content == "sparql results") %>%
+      dplyr::filter(path == "/bigdata/namespace/wdq/sparql" & http_status == "200") %>%
       dplyr::select(c(timestamp, events)) %>%
       { xts(., order.by = .$timestamp) } %>%
-      dygraph(main = "Daily SparkQL usage", group = "wdqs_basic",
+      dygraph(main = "Daily SPARQL usage", group = "wdqs_basic",
               xlab = "Date", ylab = "Events") %>%
       dyOptions(strokeWidth = 3, colors = brewer.pal(3, "Set2")[2],
                 drawPoints = TRUE, pointSize = 3, labelsKMB = TRUE,
