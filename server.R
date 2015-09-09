@@ -20,7 +20,7 @@ shinyServer(function(input, output) {
     wdqs_usage %>%
       dplyr::filter(path == "/" & http_success) %>%
       dplyr::select(c(timestamp, events)) %>%
-      { xts(., order.by = .$timestamp) } %>%
+      { xts(dplyr::select(., -timestamp), order.by = .$timestamp) } %>%
       dygraph(main = "Daily WDQS Homepage usage", group = "wdqs_basic",
               xlab = "Date", ylab = "Events") %>%
       dyOptions(strokeWidth = 3, colors = brewer.pal(3, "Set2")[1],
@@ -33,7 +33,7 @@ shinyServer(function(input, output) {
     wdqs_usage %>%
       dplyr::filter(path == "/bigdata/namespace/wdq/sparql" & http_success) %>%
       dplyr::select(c(timestamp, events)) %>%
-      { xts(., order.by = .$timestamp) } %>%
+      { xts(dplyr::select(., -timestamp), order.by = .$timestamp) } %>%
       dygraph(main = "Daily SPARQL usage", group = "wdqs_basic",
               xlab = "Date", ylab = "Events") %>%
       dyOptions(strokeWidth = 3, colors = brewer.pal(3, "Set2")[2],
