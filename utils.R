@@ -6,7 +6,8 @@ library(RColorBrewer)
 
 #Utility functions for handling particularly common tasks
 download_set <- function(dataset){
-  con <- url(paste0("http://datasets.wikimedia.org/aggregate-datasets/wdqs/", dataset))
+  con <- url(paste0("http://datasets.wikimedia.org/aggregate-datasets/wdqs/", dataset,
+                    "?ts=", gsub(x = Sys.time(), pattern = "(-| )", replacement = "")))
   return(readr::read_delim(con, delim = "\t"))
 }
 
