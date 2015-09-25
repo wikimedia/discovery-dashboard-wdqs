@@ -26,4 +26,5 @@ body <- dashboardBody(
   ) # /tabItems
 ) # /dashboardBody
 
-dashboardPage(header, sidebar, body, skin = "purple")
+dashboardPage(header, sidebar, body, skin = "purple",
+              title = "WDQS Usage Dashboard | Discovery | Engineering | Wikimedia Foundation")
