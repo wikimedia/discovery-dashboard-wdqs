@@ -22,12 +22,14 @@ shinyServer(function(input, output) {
   
   output$wdqs_usage_plot <- renderDygraph(
     polloi::make_dygraph(data = as.data.frame(wdqs_usage), xlab = "Date", ylab = "Events",
-                         title = "Daily WDQS Homepage usage")
+                         title = "Daily WDQS Homepage usage") %>%
+      dyAnnotation(as.Date("2015-09-07"), text = "A", tooltip = "WDQS Announced Publically")
   )
   
   output$sparql_usage_plot <- renderDygraph(
     polloi::make_dygraph(data = as.data.frame(sparql_usage), xlab = "Date", ylab = "Events",
-                         title = "Daily SPARQL usage")
+                         title = "Daily SPARQL usage") %>%
+      dyAnnotation(as.Date("2015-09-07"), text = "A", tooltip = "WDQS Announced Publically")
   )
   
 })
