@@ -22,7 +22,7 @@ body <- dashboardBody(
     tabItem(tabName = "wdqs_usage",
             dygraphOutput("wdqs_usage_plot", height = "200px"),
             dygraphOutput("sparql_usage_plot", height = "200px"),
-            includeMarkdown("./assets/wdqs_basic.md"))
+            includeMarkdown("./tab_documentation/wdqs_basic.md"))
   ) # /tabItems
 ) # /dashboardBody
 
