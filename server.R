@@ -1,17 +1,6 @@
 source("utils.R")
 
-existing_date <- (Sys.Date() - 1)
-
-read_wdqs <- function(){
-  data <- polloi::read_dataset("wdqs/wdqs_aggregates.tsv")
-  data <- data[order(data$timestamp),]
-  wdqs_usage <<- dplyr::filter(data, path == "/" & http_success) %>%
-    dplyr::select(c(timestamp, events))
-  
-  sparql_usage <<- dplyr::filter(data, path == "/bigdata/namespace/wdq/sparql" & http_success) %>%
-    dplyr::select(c(timestamp, events))
-  return(invisible())
-}
+existing_date <- Sys.Date() - 1
 
 shinyServer(function(input, output) {
   
@@ -20,16 +9,28 @@ shinyServer(function(input, output) {
     existing_date <<- Sys.Date()
   }
   
+  # Wrap time_frame_range to provide global settings
+  time_frame_range <- function(input_local_timeframe, input_local_daterange) {
+    return(polloi::time_frame_range(input_local_timeframe, input_local_daterange, input$timeframe_global, input$daterange_global))
+  }
+  
   output$wdqs_usage_plot <- renderDygraph(
-    polloi::make_dygraph(data = as.data.frame(wdqs_usage), xlab = "Date", ylab = "Events",
-                         title = "Daily WDQS Homepage usage") %>%
+    wdqs_usage %>%
+      polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_usage)) %>%
+      polloi::subset_by_date_range(time_frame_range(input$usage_timeframe, input$usage_timeframe_daterange)) %>%
+      polloi::make_dygraph(xlab = "Date", ylab = "Events", title = "Daily WDQS Homepage usage", group = "usage") %>%
+      dyLegend(labelsDiv = "usage_legend") %>%
       dyAnnotation(as.Date("2015-09-07"), text = "A", tooltip = "WDQS Announced Publically")
   )
   
   output$sparql_usage_plot <- renderDygraph(
-    polloi::make_dygraph(data = as.data.frame(sparql_usage), xlab = "Date", ylab = "Events",
-                         title = "Daily SPARQL usage") %>%
-      dyAnnotation(as.Date("2015-09-07"), text = "A", tooltip = "WDQS Announced Publically")
+    sparql_usage %>%
+      polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_usage)) %>%
+      polloi::subset_by_date_range(time_frame_range(input$usage_timeframe, input$usage_timeframe_daterange)) %>%
+      polloi::make_dygraph(xlab = "Date", ylab = "Events", title = "Daily SPARQL usage", group = "usage") %>%
+      dyLegend(labelsDiv = "usage_legend") %>%
+      dyAnnotation(as.Date("2015-09-07"), text = "A", tooltip = "WDQS Announced Publically") %>%
+      dyAnnotation(as.Date("2015-11-05"), text = "B", tooltip = "Possible Broken Bot on Labs")
   )
   
 })

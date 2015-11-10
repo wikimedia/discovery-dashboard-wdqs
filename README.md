@@ -1,6 +1,6 @@
 # Wikidata Query Service (WDQS) Dashboard
 
-This project is part of the [Discovery Dashboards](http://searchdata.wmflabs.org/) project.
+This project is part of the [Discovery Dashboards](http://discovery.wmflabs.org/) project.
 
 ## Quick start
 
