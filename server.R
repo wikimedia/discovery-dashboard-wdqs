@@ -33,4 +33,13 @@ shinyServer(function(input, output) {
       dyAnnotation(as.Date("2015-11-05"), text = "B", tooltip = "Possible Broken Bot on Labs")
   )
   
+  # Check datasets for missing data and notify user which datasets are missing data (if any)
+  output$message_menu <- renderMenu({
+    notifications <- list(
+      polloi::check_yesterday(sparql_usage, "SPARQL usage data"),
+      polloi::check_past_week(sparql_usage, "SPARQL usage data"))
+    notifications <- notifications[!sapply(notifications, is.null)]
+    return(dropdownMenu(type = "notifications", .list = notifications))
+  })
+  
 })

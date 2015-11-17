@@ -3,7 +3,7 @@ library(shinydashboard)
 library(dygraphs)
 
 # Header elements for the visualization
-header <- dashboardHeader(title = "Wikidata Query Service", disable = FALSE)
+header <- dashboardHeader(title = "Wikidata Query Service", dropdownMenuOutput("message_menu"), disable = FALSE)
 
 # Sidebar elements for the search visualizations
 sidebar <- dashboardSidebar(
