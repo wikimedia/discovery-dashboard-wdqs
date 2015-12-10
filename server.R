@@ -18,6 +18,7 @@ shinyServer(function(input, output) {
     wdqs_usage %>%
       polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_usage)) %>%
       polloi::subset_by_date_range(time_frame_range(input$usage_timeframe, input$usage_timeframe_daterange)) %>%
+      spider_subset(val = input$include_automata) %>%
       polloi::make_dygraph(xlab = "Date", ylab = "Events", title = "Daily WDQS Homepage usage", group = "usage") %>%
       dyLegend(labelsDiv = "usage_legend") %>%
       dyAnnotation(as.Date("2015-09-07"), text = "A", tooltip = "WDQS Announced Publically")
@@ -27,6 +28,7 @@ shinyServer(function(input, output) {
     sparql_usage %>%
       polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_usage)) %>%
       polloi::subset_by_date_range(time_frame_range(input$usage_timeframe, input$usage_timeframe_daterange)) %>%
+      spider_subset(val = input$include_automata) %>%
       polloi::make_dygraph(xlab = "Date", ylab = "Events", title = "Daily SPARQL usage", group = "usage") %>%
       dyLegend(labelsDiv = "usage_legend") %>%
       dyAnnotation(as.Date("2015-09-07"), text = "A", tooltip = "WDQS Announced Publically") %>%

@@ -4,17 +4,32 @@ library(polloi)
 library(dplyr)
 
 read_wdqs <- function() {
-  data <- polloi::read_dataset("wdqs/wdqs_aggregates.tsv") %>%
-    dplyr::rename(date = timestamp) %>%
+  data <- polloi::read_dataset("wdqs/wdqs_aggregates_new.tsv") %>%
     dplyr::arrange(date)
   
   wdqs_usage <<- data %>%
     dplyr::filter(path == "/" & http_success) %>%
-    dplyr::select(c(date, events)) %>% as.data.frame
+    dplyr::select(c(date, is_automata, events)) %>% as.data.frame
   
   sparql_usage <<- data %>%
     dplyr::filter(path == "/bigdata/namespace/wdq/sparql" & http_success) %>%
-    dplyr::select(c(date, events)) %>% as.data.frame
+    dplyr::select(c(date, is_automata, events)) %>% as.data.frame
     
   return(invisible())
+}
+
+spider_checkbox <- function(input_id){
+  checkboxInput(input_id, "Include automata", value = TRUE, width = NULL)
+}
+
+spider_subset <- function(data, val){
+  
+  if(!val){
+    data <- data[!data$is_automata,]
+  }
+  
+  return({
+    data %>% group_by(date) %>%
+      summarise(events = sum(events))
+  })
 }

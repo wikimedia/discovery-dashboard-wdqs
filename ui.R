@@ -1,3 +1,4 @@
+source("utils.R")
 library(shiny)
 library(shinydashboard)
 library(dygraphs)
@@ -35,6 +36,7 @@ body <- dashboardBody(
               column(polloi::timeframe_select("usage_timeframe"), width = 3),
               column(polloi::timeframe_daterange("usage_timeframe"), width = 3),
               column(div(id = "usage_legend"), width = 3)),
+            spider_checkbox("include_automata"),
             dygraphOutput("wdqs_usage_plot", height = "200px"),
             dygraphOutput("sparql_usage_plot", height = "200px"),
             includeMarkdown("./tab_documentation/wdqs_basic.md"))

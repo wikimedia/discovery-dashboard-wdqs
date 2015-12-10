@@ -1,6 +1,9 @@
 Wikidata Query Service (WDQS) usage
 =======
 
+This displays data on the use of the Wikidata Query Service (WDQS). Amongst other things, you can filter out automated software (or
+what looks like automated software) although this option does not operate on data prior to 3 December 2015.
+
 Outages and inaccuracies
 ------
 
