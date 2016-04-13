@@ -16,7 +16,7 @@ sidebar <- dashboardSidebar(
     menuItem(text = "WDQS Usage", tabName = "wdqs_usage"),
     menuItem(text = "Global Settings",
              selectInput(inputId = "smoothing_global", label = "Smoothing", selectize = TRUE, selected = "day",
-                         choices = c("No Smoothing" = "day", "Weekly Median" = "week", "Monthly Median" = "month")),
+                         choices = c("No Smoothing" = "day", "Weekly Median" = "week", "Monthly Median" = "month", "Splines" = "gam")),
              selectInput(inputId = "timeframe_global", label = "Time Frame", selectize = TRUE, selected = "",
                          choices = c("All available data" = "all", "Last 7 days" = "week", "Last 30 days" = "month",
                                      "Last 90 days" = "quarter", "Custom" = "custom")),
