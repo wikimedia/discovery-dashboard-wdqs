@@ -36,10 +36,11 @@ body <- dashboardBody(
               column(polloi::smooth_select("smoothing_usage"), width = 3),
               column(polloi::timeframe_select("usage_timeframe"), width = 3),
               column(polloi::timeframe_daterange("usage_timeframe"), width = 3),
-              column(div(id = "usage_legend"), width = 3)),
+              column(checkboxInput("usage_logscale", "Use Log scale", FALSE), width = 3)),
             spider_checkbox("include_automata"),
             dygraphOutput("wdqs_usage_plot", height = "200px"),
             dygraphOutput("sparql_usage_plot", height = "200px"),
+            fluidRow(div(id = "usage_legend"), style = "padding-top: 10px; height: 20px; text-align: center;"),
             includeMarkdown("./tab_documentation/wdqs_basic.md"))
   )
 )

@@ -7,7 +7,8 @@ what looks like automated software) although this option does not operate on dat
 Outages and inaccuracies
 ------
 
-  * From 2015-11-04 to 2015-11-06 there was what we believe to be a broken bot responsible for 21+ million requests.
+- **'A'**: We announced WDQS to the public.
+- **'B'**: From 2015-11-04 to 2015-11-06 there was what we believe to be a broken bot responsible for 21+ million requests.
 
 Questions, bug reports, and feature suggestions
 ------
