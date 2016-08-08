@@ -47,3 +47,11 @@ data_transform <- function(x, .f = identity, ...) {
   x[, col_names] <- .f(x[, col_names], ...)
   return(x)
 }
+
+pow <- function(base, exponent) {
+  return(base^exponent)
+}
+
+exp10 <- function(x) {
+  return(pow(10, x))
+}

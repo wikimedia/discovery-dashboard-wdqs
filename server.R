@@ -21,8 +21,8 @@ shinyServer(function(input, output) {
       conditional_transform(input$usage_logscale && polloi::smooth_switch(input$smoothing_global, input$smoothing_usage) != "day", log10) %>%
       # ...THEN smoothed:
       polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_usage), rename = FALSE) %>%
-      # ...and then exp-transformed back to the original scale:
-      conditional_transform(input$usage_logscale && polloi::smooth_switch(input$smoothing_global, input$smoothing_usage) != "day", exp) %>%
+      # ...and then exp10-transformed back to the original scale:
+      conditional_transform(input$usage_logscale && polloi::smooth_switch(input$smoothing_global, input$smoothing_usage) != "day", exp10) %>%
       polloi::subset_by_date_range(time_frame_range(input$usage_timeframe, input$usage_timeframe_daterange)) %>%
       polloi::make_dygraph(xlab = "Date", ylab = "Events", title = "Daily WDQS Homepage usage", group = "usage") %>%
       # ...because we're using dygraphs' native log-scaling:
@@ -37,7 +37,7 @@ shinyServer(function(input, output) {
       # See above for why we're conditional_transform'ing here.
       conditional_transform(input$usage_logscale && polloi::smooth_switch(input$smoothing_global, input$smoothing_usage) != "day", log10) %>%
       polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_usage), rename = FALSE) %>%
-      conditional_transform(input$usage_logscale && polloi::smooth_switch(input$smoothing_global, input$smoothing_usage) != "day", exp) %>%
+      conditional_transform(input$usage_logscale && polloi::smooth_switch(input$smoothing_global, input$smoothing_usage) != "day", exp10) %>%
       polloi::subset_by_date_range(time_frame_range(input$usage_timeframe, input$usage_timeframe_daterange)) %>%
       polloi::make_dygraph(xlab = "Date", ylab = "Events", title = "Daily SPARQL usage", group = "usage") %>%
       dyLegend(labelsDiv = "usage_legend") %>%
