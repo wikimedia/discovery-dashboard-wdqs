@@ -33,3 +33,17 @@ spider_subset <- function(data, val){
       summarise(events = sum(events))
   })
 }
+
+conditional_transform <- function(x, cond, .f, ...) {
+  if (cond) {
+    return(data_transform(x, .f, ...))
+  } else {
+    return(x)
+  }
+}
+
+data_transform <- function(x, .f = identity, ...) {
+  col_names <- setdiff(colnames(x), c("Date", "date", "timestamp"))
+  x[, col_names] <- .f(x[, col_names], ...)
+  return(x)
+}

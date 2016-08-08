@@ -16,10 +16,16 @@ shinyServer(function(input, output) {
   
   output$wdqs_usage_plot <- renderDygraph(
     wdqs_usage %>%
-      polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_usage), rename = FALSE) %>%
-      polloi::subset_by_date_range(time_frame_range(input$usage_timeframe, input$usage_timeframe_daterange)) %>%
       spider_subset(val = input$include_automata) %>%
+      # The next few lines make for better smoothing because the data is first log-transformed:
+      conditional_transform(input$usage_logscale && polloi::smooth_switch(input$smoothing_global, input$smoothing_usage) != "day", log10) %>%
+      # ...THEN smoothed:
+      polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_usage), rename = FALSE) %>%
+      # ...and then exp-transformed back to the original scale:
+      conditional_transform(input$usage_logscale && polloi::smooth_switch(input$smoothing_global, input$smoothing_usage) != "day", exp) %>%
+      polloi::subset_by_date_range(time_frame_range(input$usage_timeframe, input$usage_timeframe_daterange)) %>%
       polloi::make_dygraph(xlab = "Date", ylab = "Events", title = "Daily WDQS Homepage usage", group = "usage") %>%
+      # ...because we're using dygraphs' native log-scaling:
       dyAxis("y", logscale = input$usage_logscale) %>%
       dyLegend(labelsDiv = "usage_legend") %>%
       dyEvent(as.Date("2015-09-07"), "A (Announcement)", labelLoc = "bottom")
@@ -27,9 +33,12 @@ shinyServer(function(input, output) {
   
   output$sparql_usage_plot <- renderDygraph(
     sparql_usage %>%
-      polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_usage), rename = FALSE) %>%
-      polloi::subset_by_date_range(time_frame_range(input$usage_timeframe, input$usage_timeframe_daterange)) %>%
       spider_subset(val = input$include_automata) %>%
+      # See above for why we're conditional_transform'ing here.
+      conditional_transform(input$usage_logscale && polloi::smooth_switch(input$smoothing_global, input$smoothing_usage) != "day", log10) %>%
+      polloi::smoother(smooth_level = polloi::smooth_switch(input$smoothing_global, input$smoothing_usage), rename = FALSE) %>%
+      conditional_transform(input$usage_logscale && polloi::smooth_switch(input$smoothing_global, input$smoothing_usage) != "day", exp) %>%
+      polloi::subset_by_date_range(time_frame_range(input$usage_timeframe, input$usage_timeframe_daterange)) %>%
       polloi::make_dygraph(xlab = "Date", ylab = "Events", title = "Daily SPARQL usage", group = "usage") %>%
       dyLegend(labelsDiv = "usage_legend") %>%
       dyAxis("y", logscale = input$usage_logscale) %>%

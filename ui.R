@@ -36,7 +36,7 @@ body <- dashboardBody(
               column(polloi::smooth_select("smoothing_usage"), width = 3),
               column(polloi::timeframe_select("usage_timeframe"), width = 3),
               column(polloi::timeframe_daterange("usage_timeframe"), width = 3),
-              column(checkboxInput("usage_logscale", "Use Log scale", FALSE), width = 3)),
+              column(checkboxInput("usage_logscale", "Use Log scale", TRUE), width = 3)),
             spider_checkbox("include_automata"),
             dygraphOutput("wdqs_usage_plot", height = "200px"),
             dygraphOutput("sparql_usage_plot", height = "200px"),
