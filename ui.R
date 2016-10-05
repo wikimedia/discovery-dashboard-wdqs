@@ -1,6 +1,4 @@
-library(shiny)
-library(shinydashboard)
-library(dygraphs)
+source("utils.R")
 
 function(request) {
   dashboardPage(
