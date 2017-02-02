@@ -1,14 +1,12 @@
-Wikidata Query Service (WDQS) usage
+Wikidata Query Service (WDQS) homepage traffic
 =======
 
-This displays data on the use of the Wikidata Query Service (WDQS). Amongst other things, you can filter out automated software (or
-what looks like automated software) although this option does not operate on data prior to 3 December 2015.
+This displays data on the visits to Wikidata Query Service ([query.wikidata.org](https://query.wikidata.org/)). Amongst other things, you can filter out automated software (or what looks like automated software) although this option does not operate on data prior to 3 December 2015.
 
 Outages and inaccuracies
 ------
 
 - **'A'**: We announced WDQS to the public.
-- **'B'**: From 2015-11-04 to 2015-11-06 there was what we believe to be a broken bot responsible for 21+ million requests.
 
 Questions, bug reports, and feature suggestions
 ------

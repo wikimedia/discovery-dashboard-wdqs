@@ -1,4 +1,10 @@
-source("utils.R")
+library(shiny)
+library(shinydashboard)
+library(dygraphs)
+
+spider_checkbox <- function(input_id) {
+  shiny::checkboxInput(input_id, "Include automata", value = TRUE, width = NULL)
+}
 
 function(request) {
   dashboardPage(
@@ -11,7 +17,8 @@ function(request) {
         tags$script(src = "custom.js")
       ),
       sidebarMenu(id = "tabs",
-                  menuItem(text = "WDQS Usage", tabName = "wdqs_usage"),
+                  menuItem(text = "Endpoint Usage", tabName = "endpoint_usage"),
+                  menuItem(text = "WDQS Visits", tabName = "wdqs_visits"),
                   menuItem(text = "Global Settings",
                            selectInput(inputId = "smoothing_global", label = "Smoothing", selectize = TRUE, selected = "day",
                                        choices = c("No Smoothing" = "day", "Weekly Median" = "week", "Monthly Median" = "month", "Splines" = "gam")),
@@ -23,15 +30,23 @@ function(request) {
 
     dashboardBody(
       tabItems(
-        tabItem(tabName = "wdqs_usage",
+        tabItem(tabName = "endpoint_usage",
                 fluidRow(
                   column(polloi::smooth_select("smoothing_usage"), width = 4),
                   column(checkboxInput("usage_logscale", "Use Log scale", TRUE), width = 4),
-                  column(spider_checkbox("include_automata"), width = 4)),
-                dygraphOutput("wdqs_usage_plot", height = "200px"),
+                  column(spider_checkbox("include_automata_usage"), width = 4)),
                 dygraphOutput("sparql_usage_plot", height = "200px"),
+                dygraphOutput("ldf_usage_plot", height = "200px"),
                 fluidRow(div(id = "usage_legend"), style = "padding-top: 10px; height: 20px; text-align: center;"),
-                includeMarkdown("./tab_documentation/wdqs_basic.md"))
+                includeMarkdown("./tab_documentation/wdqs_usage.md")),
+        tabItem(tabName = "wdqs_visits",
+                fluidRow(
+                  column(polloi::smooth_select("smoothing_visits"), width = 4),
+                  column(checkboxInput("visits_logscale", "Use Log scale", TRUE), width = 4),
+                  column(spider_checkbox("include_automata_visits"), width = 4)),
+                dygraphOutput("wdqs_visits_plot", height = "400px"),
+                fluidRow(div(id = "wdqs_visits_legend"), style = "padding-top: 10px; height: 20px; text-align: center;"),
+                includeMarkdown("./tab_documentation/wdqs_visits.md"))
       )
     ),
 
