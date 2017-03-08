@@ -27,7 +27,8 @@ shinyServer(function(input, output, session) {
       dyAxis("y", logscale = input$usage_logscale) %>%
       dyLegend(labelsDiv = "usage_legend") %>%
       dyRangeSelector %>%
-      dyEvent(as.Date("2017-01-01"), "D (Started tracking LDF usage)", labelLoc = "bottom")
+      dyEvent(as.Date("2017-01-01"), "D (Started tracking LDF usage)", labelLoc = "bottom") %>%
+      dyEvent(as.Date("2017-01-01"), "R (reportupdater)", labelLoc = "bottom")
   )
 
   output$sparql_usage_plot <- renderDygraph(
@@ -43,7 +44,8 @@ shinyServer(function(input, output, session) {
       dyRangeSelector %>%
       dyEvent(as.Date("2015-09-07"), "A (Announcement)", labelLoc = "bottom") %>%
       dyEvent(as.Date("2015-11-05"), "B (Labs bot)", labelLoc = "bottom") %>%
-      dyEvent(as.Date("2016-12-28"), "C (Bot ruleset)", labelLoc = "bottom")
+      dyEvent(as.Date("2016-12-28"), "C (Bot ruleset)", labelLoc = "bottom") %>%
+      dyEvent(as.Date("2017-01-01"), "R (reportupdater)", labelLoc = "bottom")
   )
 
   output$wdqs_visits_plot <- renderDygraph(
@@ -59,7 +61,8 @@ shinyServer(function(input, output, session) {
       # ...because we're using dygraphs' native log-scaling:
       dyAxis("y", logscale = input$visits_logscale) %>%
       dyLegend(labelsDiv = "wdqs_visits_legend") %>%
-      dyEvent(as.Date("2015-09-07"), "A (Announcement)", labelLoc = "bottom")
+      dyEvent(as.Date("2015-09-07"), "A (Announcement)", labelLoc = "bottom") %>%
+      dyEvent(as.Date("2017-01-01"), "R (reportupdater)", labelLoc = "bottom")
   )
 
   # Check datasets for missing data and notify user which datasets are missing data (if any)
