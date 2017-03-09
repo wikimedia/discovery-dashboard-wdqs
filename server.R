@@ -27,8 +27,7 @@ shinyServer(function(input, output, session) {
       dyAxis("y", logscale = input$usage_logscale) %>%
       dyLegend(labelsDiv = "usage_legend") %>%
       dyRangeSelector %>%
-      dyEvent(as.Date("2017-01-01"), "D (Started tracking LDF usage)", labelLoc = "bottom") %>%
-      dyEvent(as.Date("2017-01-01"), "R (reportupdater)", labelLoc = "bottom")
+      dyEvent(as.Date("2017-01-01"), "D (Started tracking LDF usage)", labelLoc = "bottom")
   )
 
   output$sparql_usage_plot <- renderDygraph(
