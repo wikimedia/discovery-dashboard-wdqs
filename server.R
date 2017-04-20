@@ -44,7 +44,8 @@ shinyServer(function(input, output, session) {
       dyEvent(as.Date("2015-09-07"), "A (Announcement)", labelLoc = "bottom") %>%
       dyEvent(as.Date("2015-11-05"), "B (Labs bot)", labelLoc = "bottom") %>%
       dyEvent(as.Date("2016-12-28"), "C (Bot ruleset)", labelLoc = "bottom") %>%
-      dyEvent(as.Date("2017-01-01"), "R (reportupdater)", labelLoc = "bottom")
+      dyEvent(as.Date("2017-01-01"), "R (reportupdater)", labelLoc = "bottom") %>%
+      dyEvent(as.Date("2017-02-18"), "E (Alias)", labelLoc = "bottom")
   )
 
   output$wdqs_visits_plot <- renderDygraph(

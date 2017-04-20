@@ -18,7 +18,7 @@ function(request) {
       ),
       sidebarMenu(id = "tabs",
                   menuItem(text = "Endpoint Usage", tabName = "endpoint_usage"),
-                  menuItem(text = "WDQS Visits", tabName = "wdqs_visits"),
+                  menuItem(text = "Homepage Traffic", tabName = "wdqs_visits"),
                   menuItem(text = "Global Settings",
                            selectInput(inputId = "smoothing_global", label = "Smoothing", selectize = TRUE, selected = "day",
                                        choices = c("No Smoothing" = "day", "Weekly Median" = "week", "Monthly Median" = "month", "Splines" = "gam")),

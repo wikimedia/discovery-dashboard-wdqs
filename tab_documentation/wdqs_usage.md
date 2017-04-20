@@ -10,6 +10,7 @@ Outages and inaccuracies
 * '__B__': From 2015-11-04 to 2015-11-06 there was what we believe to be a broken bot responsible for 21+ million requests.
 * '__C__': As part of a refactoring to a new metric-generating framework (see [T150915](https://phabricator.wikimedia.org/T150915)), we revised the ruleset for determining when a request came from a bot/tool. For example, requests with URLs and email addresses in the UserAgent were classified as automata after 2016-12-28.
 * '__D__': We started tracking LDF endpoint usage on 2017-01-01. See [T153936](https://phabricator.wikimedia.org/T153936) and [T136358](https://phabricator.wikimedia.org/T136358) for more details.
+* '__E__': We noticed that we were undercounting SPARQL usage because we were not including requests made to '/sparql' alias for '/bigdata/namespace/wdq/sparql'. We fixed the counting query on 2017-04-20 but could only recount from 2017-02-18. See [T163501](https://phabricator.wikimedia.org/T163501) for more details.
 * '__R__': on 2017-01-01 we started calculating all of Discovery's metrics using a new version of [our data retrieval and processing codebase](https://phabricator.wikimedia.org/diffusion/WDGO/) that we migrated to [Wikimedia Analytics](https://www.mediawiki.org/wiki/Analytics)' [Reportupdater infrastructure](https://wikitech.wikimedia.org/wiki/Analytics/Reportupdater). See [T150915](https://phabricator.wikimedia.org/T150915) for more details.
 
 Questions, bug reports, and feature suggestions
