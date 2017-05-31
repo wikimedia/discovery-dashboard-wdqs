@@ -1,7 +1,7 @@
 library(magrittr)
 
 read_wdqs <- function() {
-  data <- polloi::read_dataset("discovery/wdqs/basic_usage.tsv", col_types = "Dclli") %>%
+  data <- polloi::read_dataset("discovery/metrics/wdqs/basic_usage.tsv", col_types = "Dclli") %>%
     dplyr::arrange(date)
   wdqs_visits <<- data %>%
     dplyr::filter(path == "/" & http_success) %>%
