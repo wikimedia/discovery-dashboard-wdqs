@@ -13,7 +13,7 @@ Outages and inaccuracies
 * '__E__': We noticed that we were undercounting SPARQL usage because we were not including requests made to '/sparql' alias for '/bigdata/namespace/wdq/sparql'. We fixed the counting query on 2017-04-20 but could only recount from 2017-02-18. See [T163501](https://phabricator.wikimedia.org/T163501) for more details.
 * '__R__': on 2017-01-01 we started calculating all of Discovery's metrics using a new version of [our data retrieval and processing codebase](https://phabricator.wikimedia.org/diffusion/WDGO/) that we migrated to [Wikimedia Analytics](https://www.mediawiki.org/wiki/Analytics)' [Reportupdater infrastructure](https://wikitech.wikimedia.org/wiki/Analytics/Reportupdater). See [T150915](https://phabricator.wikimedia.org/T150915) for more details.
 
-Q--------
+--------
 <hr style="border-color: gray;">
 <p style="font-size: small;">
   <strong>Link to this dashboard:</strong> <a href="https://discovery.wmflabs.org/external/#traffic_summary">https://discovery.wmflabs.org/external/#traffic_summary</a>
