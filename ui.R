@@ -50,5 +50,5 @@ function(request) {
       )
     ),
 
-    skin = "purple", title = "WDQS Usage Dashboard | Search Platform | Technology | Wikimedia Foundation")
+    skin = "purple", title = "Wikidata Query Service Usage Dashboard | Search Platform | Technology | Wikimedia Foundation")
 }
