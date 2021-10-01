@@ -31,6 +31,7 @@ function(request) {
     dashboardBody(
       tabItems(
         tabItem(tabName = "endpoint_usage",
+                includeHTML("./tab_documentation/notice.html"),
                 fluidRow(
                   column(polloi::smooth_select("smoothing_usage"), width = 4),
                   column(checkboxInput("usage_logscale", "Use Log scale", TRUE), width = 4),
@@ -40,6 +41,7 @@ function(request) {
                 fluidRow(div(id = "usage_legend"), style = "padding-top: 10px; height: 20px; text-align: center;"),
                 includeMarkdown("./tab_documentation/wdqs_usage.md")),
         tabItem(tabName = "wdqs_visits",
+                includeHTML("./tab_documentation/notice.html"),
                 fluidRow(
                   column(polloi::smooth_select("smoothing_visits"), width = 4),
                   column(checkboxInput("visits_logscale", "Use Log scale", TRUE), width = 4),

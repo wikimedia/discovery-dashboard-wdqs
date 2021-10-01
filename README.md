@@ -1,6 +1,6 @@
-# Wikidata Query Service (WDQS) Dashboard
+# Wikidata Query Service (WDQS) Dashboard - ARCHIVED
 
-This codebase is part of the legacy [Discovery Dashboards](https://discovery.wmflabs.org/) project. It is maintained by [Mikhail Popov](https://meta.wikimedia.org/wiki%2fUser%3aMPopov_%28WMF%29).
+This codebase is part of the legacy [Discovery Dashboards](https://discovery.wmflabs.org/) project. It is kept for archival purposes. It was maintained by [Mikhail Popov](https://meta.wikimedia.org/wiki%2fUser%3aMPopov_%28WMF%29).
 
 ## Quick start
 

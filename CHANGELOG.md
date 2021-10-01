@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2021/10/01
+- Added decommission notice ([T227782](https://phabricator.wikimedia.org/T227782))
+
 ## 2017/06/20
 - Added licensing info ([T167930](https://phabricator.wikimedia.org/T167930))
 
